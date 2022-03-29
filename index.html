@@ -16,13 +16,17 @@
   <body>
     <header>
         <div class="container-fluid bg-dark fixed-top px-2 py-3">
-            <div class="row">
-                <div class="col d-flex justify-content-around">
-                    <button class="btn btn-light mx-2" id="add-package-button" onclick="addRandomPackages(1)">Add Package</button>
-                    <button class="btn btn-primary mx-2" id="priority-button" onclick="toggleFilter('Priority')">Priority: Any</button>
-                    <button class="btn btn-primary mx-2" id="weight-button" onclick="toggleFilter('Weight')">Weight: Any</button>
-                    <button class="btn btn-primary mx-2" id="fragile-button" onclick="toggleFilter('Fragile')">Fragility: Any</button>
-                    <button class="btn btn-danger mx-2" id="show-hide-button" onclick="toggleHidden()">Show Filtered</button>
+            <div class="row text-center justify-content-around align-items-center">
+                <div class="col-3">
+                    <button class="btn btn-light mx-sm-2" id="add-package-button" onclick="addRandomPackages(1)">Add Package</button>
+                </div>
+                <div class="col-6 d-flex flex-column flex-sm-row justify-content-between">
+                    <button class="btn btn-primary mx-sm-2 my-2 my-sm-0" id="priority-button" onclick="toggleFilter('Priority')">Priority: Any</button>
+                    <button class="btn btn-primary mx-sm-2 my-2 my-sm-0" id="weight-button" onclick="toggleFilter('Weight')">Weight: Any</button>
+                    <button class="btn btn-primary mx-sm-2 my-2 my-sm-0" id="fragile-button" onclick="toggleFilter('Fragile')">Fragility: Any</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-danger mx-sm-2" id="show-hide-button" onclick="toggleHidden()">Hide Filtered</button>
                 </div>
             </div>
         </div>

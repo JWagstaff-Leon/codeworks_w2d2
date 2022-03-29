@@ -2,7 +2,7 @@ const packages = [];
 const packagesContainer = document.getElementById("packages");
 
 const filters = {Priority: "Any", Weight: "Any", Fragile: "Any", hidden: false};
-const buttonElements = {Priority: document.getElementById("priority-button"), Weight: document.getElementById("weight-button"), Fragile: document.getElementById("fragile-button"), hidden: document.getElementById};
+const buttonElements = {Priority: document.getElementById("priority-button"), Weight: document.getElementById("weight-button"), Fragile: document.getElementById("fragile-button"), hidden: document.getElementById("show-hide-button")};
 
 const randChars = "abcdefghijklmnopqrstuvwxyz01233456789";
 
@@ -65,6 +65,9 @@ function toggleFilter(filter)
 function toggleHidden()
 {
     filters.hidden = !filters.hidden;
+
+    buttonElements.hidden.innerText = (filters.hidden ? "Show" : "Hide") + " Filtered";
+
     updatePackages();
 }
 
