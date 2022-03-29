@@ -10,6 +10,8 @@ let correctPackage;
 
 function startGame(packageCount)
 {
+    endGame();
+
     addRandomPackages(packageCount);
     
     correctPackage = packages[Math.floor(Math.random() * packageCount)];
