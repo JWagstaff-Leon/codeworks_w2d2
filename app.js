@@ -6,6 +6,32 @@ const buttonElements = {Priority: document.getElementById("priority-button"), We
 
 const randChars = "abcdefghijklmnopqrstuvwxyz01233456789";
 
+let correctPackage;
+
+function startGame(packageCount)
+{
+    addRandomPackages(packageCount);
+    
+    correctPackage = packages[Math.floor(Math.random() * packageCount)];
+}
+
+function endGame()
+{
+    correctPackage = undefined;
+    
+    for (let i = packages.length; i > 0; i--)
+    {
+        packages.pop();
+    }
+    
+    filters.Priority = "Any";
+    filters.Weight = "Any";
+    filters.Fragile = "Any";
+    filters.hidden = false;
+
+    draw();
+}
+
 function addRandomPackages(count)
 {
     for(let i = 0; i < count; i++)
@@ -15,9 +41,9 @@ function addRandomPackages(count)
         {
             from: randString(8, 26),
             to: randString(8, 26),
-            weight: (Math.round(Math.random()) == 1 ? true : false),
-            priority: (Math.round(Math.random()) == 1 ? true : false),
-            fragile: (Math.round(Math.random()) == 1 ? true : false),
+            Weight: (Math.round(Math.random()) == 1 ? true : false),
+            Priority: (Math.round(Math.random()) == 1 ? true : false),
+            Fragile: (Math.round(Math.random()) == 1 ? true : false),
             tracking: randString(8, Infinity) + "-" + randString(8, Infinity),
             element: undefined
         };
@@ -42,37 +68,50 @@ function randString(length, end)
     return randomString;
 }
 
-function toggleFilter(filter)
+function guess(guessID)
 {
-    switch(filters[filter])
+    if(guessID === correctPackage.tracking)
     {
-        case "Any":
-            filters[filter] = "Yes";
-            break;
-        case "Yes":
-            filters[filter] = "No";
-            break;
-        case "No":
-            filters[filter] = "Any";
-            break;
+        alert("You're winner!");
+    }
+    else
+    {
+        alert("Nah; nah; you suck");
     }
 
-    buttonElements[filter].innerText = filter + ": " + filters[filter];
+    endGame();
+}
 
+function toggleFilter(filter)
+{
+    filters[filter] = (correctPackage[filter] ? "Yes" : "No");
+    updateFilterTexts();
     updatePackages();
+}
+
+function updateFilterTexts()
+{
+    buttonElements.Priority.innerText = "Priority: " + filters.Priority;
+    buttonElements.Weight.innerText = "Weight: " + filters.Weight;
+    buttonElements.Fragile.innerText = "Fragile: " + filters.Fragile;
 }
 
 function toggleHidden()
 {
     filters.hidden = !filters.hidden;
 
-    buttonElements.hidden.innerText = (filters.hidden ? "Show" : "Hide") + " Filtered";
-
+    updateHiddenText();
     updatePackages();
+}
+function updateHiddenText()
+{
+    buttonElements.hidden.innerText = (filters.hidden ? "Show" : "Hide") + " Filtered";
 }
 
 function draw()
 {
+    updateFilterTexts();
+    updateHiddenText();
     let template = "";
 
     packages.forEach(package => 
@@ -81,13 +120,13 @@ function draw()
         template += 
         `
         <div class="col-12 col-md-4" id="${package.tracking}">
-        <div class="card m-2 p-3">
+        <div class="card m-2 p-3" onclick="guess('${package.tracking}')">
                 <h4 class="card-title">To: ${package.to}</h4>
                 <h5 class="card-subtitle">From: ${package.from}</h5>
                 <h6 class="card-subtitle text-dark mt-2 text-center">
-                    <i class="${package.priority ? "mdi mdi-exclamation-thick" : ""}" title="priority package"></i>
-                    <i class="${package.weight ? "mdi mdi-weight" : ""}" title="heavy package"></i>
-                    <i class="${package.fragile ? "mdi mdi-glass-fragile" : ""}" title="fragile package"></i>
+                    <i class="${package.Priority ? "mdi mdi-exclamation-thick" : ""}" title="priority package"></i>
+                    <i class="${package.Weight ? "mdi mdi-weight" : ""}" title="heavy package"></i>
+                    <i class="${package.Fragile ? "mdi mdi-glass-fragile" : ""}" title="fragile package"></i>
                     </h6>
                     <hr>
                     <h4 class="card-text">Tracking number:</h4>
@@ -110,12 +149,12 @@ function updatePackages()
     
         package.element.children[0].classList.add((index % 2 === 0 ? "text-dark" : "text-light"));
         package.element.children[0].classList.add((index % 2 === 0 ? "bg-light" : "bg-dark"));
-        if(filters.Weight == "Yes" && package.weight === false ||
-           filters.Weight == "No" && package.weight === true ||
-           filters.Priority == "Yes" && package.priority === false ||
-           filters.Priority == "No" && package.priority === true ||
-           filters.Fragile == "Yes" && package.fragile === false ||
-           filters.Fragile == "No" && package.fragile === true)
+        if(filters.Weight == "Yes" && package.Weight === false ||
+           filters.Weight == "No" && package.Weight === true ||
+           filters.Priority == "Yes" && package.Priority === false ||
+           filters.Priority == "No" && package.Priority === true ||
+           filters.Fragile == "Yes" && package.Fragile === false ||
+           filters.Fragile == "No" && package.Fragile === true)
         {
             package.element.children[0].classList.add("filtered-package");
             if(filters.hidden)
