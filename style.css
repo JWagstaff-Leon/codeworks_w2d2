@@ -92,3 +92,17 @@ i.mdi-exclamation-thick.yes-priority
     transform: scale(1.0);
     transition: all 0.3s ease-in;
 }
+
+#packages
+{
+    position: relative;
+    top: 100px;
+}
+
+@media only screen and (max-width: 576px)
+{
+    #packages
+    {
+        top: 200px;
+    }
+}

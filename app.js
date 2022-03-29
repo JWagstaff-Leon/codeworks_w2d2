@@ -130,6 +130,7 @@ function updatePackages()
         else
         {
             package.element.children[0].classList.remove("filtered-package");
+            package.element.classList.remove("d-none");
         }
 
         switch(filters.Priority)
