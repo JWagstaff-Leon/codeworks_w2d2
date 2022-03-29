@@ -1,0 +1,94 @@
+body
+{
+    background-color: rgb(130, 217, 233);
+}
+
+.card.bg-light
+{
+    background-color: rgb(187, 147, 62) !important;
+}
+
+.card.bg-light.filtered-package
+{
+    background-color: rgb(149, 148, 145) !important;
+}
+
+.card.bg-dark
+{
+    background-color: rgb(160, 121, 36) !important;
+}
+
+.card.bg-dark.filtered-package
+{
+    background-color: rgb(96, 94, 88) !important;
+}
+
+.card.text-light
+{
+    color: rgb(231, 225, 219) !important;
+}
+
+.card.text-light.filtered-package
+{
+    color: rgb(191, 188, 186) !important;
+}
+
+.card.text-dark
+{
+    color: rgb(46, 47, 48) !important;
+}
+
+.card.text-dark.filtered-package
+{
+    color: rgb(79, 81, 82) !important;
+}
+
+i.mdi-weight.no-weight
+{
+    transform: scale(0.5);
+    color: rgb(223, 21, 21);
+}
+
+i.mdi-glass-fragile.no-fragile
+{
+    transform: scale(0.5);
+    color: rgb(223, 21, 21);
+}
+
+i.mdi-exclamation-thick.no-priority
+{
+    transform: scale(0.5);
+    color: rgb(223, 21, 21);
+}
+
+i.mdi-weight.yes-weight
+{
+    transform: scale(2);
+    color: #0ae92f;
+}
+
+i.mdi-glass-fragile.yes-fragile
+{
+    transform: scale(2);
+    color: #0ae92f;
+}
+
+i.mdi-exclamation-thick.yes-priority
+{
+    transform: scale(2);
+    color: #0ae92f;
+}
+
+.card
+{
+    border-radius: 10px;
+    border: 2px solid black;
+
+    transition: all 0.3s ease-in;
+}
+
+.card i
+{
+    transform: scale(1.0);
+    transition: all 0.3s ease-in;
+}
